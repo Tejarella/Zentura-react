@@ -250,21 +250,21 @@ const testimonials = [
     name: "Alex Chen",
     quote: "Zentura transformed my yoga practice! The chakra focus and achievement system keeps me motivated every day.",
     stars: 5,
-    avatar: "/api/placeholder/150/150"
+    avatar: "https://i.pinimg.com/474x/60/5b/9b/605b9b86a82dd0147ed8aa612381326f.jpg"
   },
   {
     id: 2,
     name: "Sarah Johnson",
     quote: "I love the spiritual elements and how I can track my chakra energy. The animations make each session magical!",
     stars: 5,
-    avatar: "/api/placeholder/150/150"
+    avatar: "https://thumb.photo-ac.com/2a/2a921e47ef53e782b2b4e16a1b236bd9_t.jpeg"
   },
   {
     id: 3,
     name: "Mike Rodriguez",
     quote: "The Sanskrit names and chakra visuals make yoga feel exciting and mystical. It's like practicing in another dimension!",
     stars: 4,
-    avatar: "/api/placeholder/150/150"
+    avatar: "https://cdn.prod.website-files.com/6600e1eab90de089c2d9c9cd/6697274132daf24911799669_6635609f1211ec0f632803d6_fatzFxYM_ad86_raw.jpeg"
   }
 ];
 
@@ -1041,11 +1041,6 @@ const ZenturaApp = () => {
           </AnimatedElement>
         </section>
       </main>
-
-
-
-
-// Continuing the ZenturaApp component, completing the footer section
       {/* Footer */}
       <footer className={`mt-20 ${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-gray-100 border-gray-200'} border-t py-12`}>
         <div className="container mx-auto px-4">
