@@ -6,7 +6,6 @@ import {
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-
 // Yoga pose data with Sanskrit names and chakra associations
 const yogaPoses = [
   {
@@ -299,7 +298,7 @@ const AnimatedElement = ({ children, delay = 0, direction = "up" }) => {
   );
 };
 
-// Enhanced timer modal for dark theme
+// Enhanced timer modal
 const TimerModal = ({ pose, onClose, darkMode }) => {
   const parseDuration = (duration) => {
     const [value, unit] = duration.split(" ");
@@ -343,9 +342,9 @@ const TimerModal = ({ pose, onClose, darkMode }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-md">
-      <div className={`${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-3xl p-8 max-w-md w-full mx-4 border ${darkMode ? 'border-indigo-900' : 'border-gray-200'} shadow-2xl relative overflow-hidden`}>
-        <div className={`absolute inset-0 ${darkMode ? 'bg-gradient-to-br from-gray-900 to-indigo-950' : 'bg-gradient-to-br from-white to-gray-50'} opacity-50`}></div>
-        <div className="absolute top-0 left-0 w-full h-1 bg-gray-800">
+      <div className={`${darkMode ? 'bg-gray-900 border-indigo-900' : 'bg-white border-gray-200'} rounded-3xl p-8 max-w-md w-full mx-4 border shadow-2xl relative overflow-hidden`}>
+        <div className={`absolute inset-0 bg-gradient-to-br ${darkMode ? 'from-gray-900 to-indigo-950' : 'from-gray-50 to-gray-100'} opacity-50`}></div>
+        <div className={`absolute top-0 left-0 w-full h-1 ${darkMode ? 'bg-gray-800' : 'bg-gray-200'}`}>
           <div
             className="h-full bg-gradient-to-r"
             style={{
@@ -355,9 +354,8 @@ const TimerModal = ({ pose, onClose, darkMode }) => {
           ></div>
         </div>
 
-        {/* Optimized particle effects */}
-        <div className="absolute top-10 right-10 w-20 h-20 rounded-full blur-xl opacity-20 animate-pulse" style={{ backgroundColor: pose.chakraColor, willChange: 'transform' }}></div>
-        <div className="absolute bottom-10 left-10 w-32 h-32 rounded-full blur-xl opacity-10 animate-pulse" style={{ animationDuration: '4s', backgroundColor: pose.chakraColor, willChange: 'transform' }}></div>
+        <div className={`absolute top-10 right-10 w-20 h-20 rounded-full blur-xl opacity-20 animate-pulse`} style={{ backgroundColor: pose.chakraColor, willChange: 'transform' }}></div>
+        <div className={`absolute bottom-10 left-10 w-32 h-32 rounded-full blur-xl opacity-10 animate-pulse`} style={{ animationDuration: '4s', backgroundColor: pose.chakraColor, willChange: 'transform' }}></div>
 
         <div className="relative z-10">
           <div className="flex justify-between items-center mb-6">
@@ -365,19 +363,19 @@ const TimerModal = ({ pose, onClose, darkMode }) => {
             <button
               onClick={onClose}
               aria-label="Close timer modal"
-              className={`${darkMode ? 'text-indigo-400 hover:text-indigo-200' : 'text-gray-500 hover:text-gray-800'}`}
+              className={`${darkMode ? 'text-indigo-400 hover:text-indigo-200' : 'text-gray-500 hover:text-gray-700'}`}
             >
-              <XCircle annualized size={24} />
+              <XCircle size={24} />
             </button>
           </div>
 
-          <p className={`${darkMode ? 'text-indigo-200' : 'text-gray-600'} mb-2`}>{pose.englishName}</p>
-          <p className={`${darkMode ? 'text-indigo-300' : 'text-gray-700'} mb-6`}>{pose.description}</p>
+          <p className={`${darkMode ? 'text-indigo-200' : 'text-gray-700'} mb-2`}>{pose.englishName}</p>
+          <p className={`${darkMode ? 'text-indigo-300' : 'text-gray-600'} mb-6`}>{pose.description}</p>
 
           <div className="flex justify-center mb-8">
             <div className={`w-40 h-40 rounded-full ${darkMode ? 'bg-gray-800' : 'bg-gray-100'} border-4 flex items-center justify-center relative`} style={{ borderColor: pose.chakraColor }}>
-              <div className="absolute inset-0 rounded-full border-t-4 animate-spin" style={{ borderColor: pose.chakraColor, animationDuration: '10s', willChange: 'transform' }}></div>
-              <div className="absolute inset-0 rounded-full border-l-2 animate-spin" style={{ borderColor: '#5C75FF', animationDuration: '8s', animationDirection: 'reverse', willChange: 'transform' }}></div>
+              <div className={`absolute inset-0 rounded-full border-t-4 animate-spin`} style={{ borderColor: pose.chakraColor, animationDuration: '10s', willChange: 'transform' }}></div>
+              <div className={`absolute inset-0 rounded-full border-l-2 animate-spin`} style={{ borderColor: darkMode ? '#5C75FF' : '#4B5EAA', animationDuration: '8s', animationDirection: 'reverse', willChange: 'transform' }}></div>
               <div className={`text-4xl font-bold ${darkMode ? 'text-indigo-100' : 'text-gray-800'}`}>{formatTime(timeLeft)}</div>
             </div>
           </div>
@@ -389,7 +387,7 @@ const TimerModal = ({ pose, onClose, darkMode }) => {
                   onClick={startTimer}
                   disabled={isRunning}
                   aria-label="Start timer"
-                  className={`py-2 rounded-lg font-medium ${isRunning ? (darkMode ? 'bg-gray-800 text-gray-500' : 'bg-gray-200 text-gray-500') : 'text-white hover:opacity-90'} transition-colors`}
+                  className={`py-2 rounded-lg font-medium ${isRunning ? (darkMode ? 'bg-gray-800 text-gray-500' : 'bg-gray-200 text-gray-400') : 'text-white hover:opacity-90'} transition-colors`}
                   style={{ backgroundColor: isRunning ? '' : pose.chakraColor }}
                 >
                   Start
@@ -398,7 +396,7 @@ const TimerModal = ({ pose, onClose, darkMode }) => {
                   onClick={pauseTimer}
                   disabled={!isRunning}
                   aria-label="Pause timer"
-                  className={`py-2 rounded-lg font-medium ${!isRunning ? (darkMode ? 'bg-gray-800 text-gray-500' : 'bg-gray-200 text-gray-500') : 'text-white hover:opacity-90'} transition-colors`}
+                  className={`py-2 rounded-lg font-medium ${!isRunning ? (darkMode ? 'bg-gray-800 text-gray-500' : 'bg-gray-200 text-gray-400') : 'text-white hover:opacity-90'} transition-colors`}
                   style={{ backgroundColor: !isRunning ? '' : pose.chakraColor }}
                 >
                   Pause
@@ -406,7 +404,7 @@ const TimerModal = ({ pose, onClose, darkMode }) => {
                 <button
                   onClick={resetTimer}
                   aria-label="Reset timer"
-                  className={`py-2 rounded-lg font-medium ${darkMode ? 'bg-indigo-800 text-indigo-100 hover:bg-indigo-700' : 'bg-gray-600 text-white hover:bg-gray-500'} transition-colors`}
+                  className={`py-2 rounded-lg font-medium ${darkMode ? 'bg-indigo-800 text-indigo-100 hover:bg-indigo-700' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'} transition-colors`}
                 >
                   Reset
                 </button>
@@ -423,9 +421,9 @@ const TimerModal = ({ pose, onClose, darkMode }) => {
             )}
           </div>
 
-          <div className={`${darkMode ? 'bg-gray-800 bg-opacity-60' : 'bg-gray-100'} p-4 rounded-xl border ${darkMode ? 'border-indigo-900' : ''}`}>
-            <h4 className={`font-semibold ${darkMode ? 'text-indigo-200' : 'text-gray-800'} mb-2`}>Benefits:</h4>
-            <ul className={`${darkMode ? 'text-indigo-300' : 'text-gray-700'} space-y-1`}>
+          <div className={`${darkMode ? 'bg-gray-800 bg-opacity-60 border-indigo-900' : 'bg-gray-100 border-gray-200'} p-4 rounded-xl border`}>
+            <h4 className={`font-semibold mb-2 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>Benefits:</h4>
+            <ul className={`space-y-1 ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
               {pose.benefits.map((benefit, index) => (
                 <li key={index} className="flex items-center">
                   <ShieldCheck size={16} className="mr-2" style={{ color: pose.chakraColor }} />
@@ -446,16 +444,16 @@ const TimerModal = ({ pose, onClose, darkMode }) => {
   );
 };
 
-// Enhanced futuristic yoga pose card for dark theme
+// Enhanced futuristic yoga pose card
 const PoseCard = ({ pose, onStartPractice, darkMode }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
-      className={`${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-2xl p-6 shadow-xl transition-all duration-500 border ${isHovered ? 'transform scale-105 shadow-2xl' : ''} ${darkMode ? (isHovered ? 'border-indigo-600' : 'border-gray-800') : (isHovered ? 'border-gray-300' : 'border-gray-200')}`}
+      className={`${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} rounded-2xl p-6 shadow-xl transition-all duration-500 border ${isHovered ? 'transform scale-105 shadow-2xl border-indigo-600' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={darkMode && isHovered ? { boxShadow: `0 0 30px -5px ${pose.chakraColor}30` } : {}}
+      style={isHovered ? { boxShadow: `0 0 30px -5px ${pose.chakraColor}30` } : {}}
     >
       <div className="flex items-center justify-between mb-6">
         <div className="p-3 rounded-xl text-white shadow-lg" style={{ backgroundColor: pose.chakraColor }}>
@@ -467,8 +465,8 @@ const PoseCard = ({ pose, onStartPractice, darkMode }) => {
       </div>
 
       <h3 className={`text-xl font-bold mb-1 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>{pose.name}</h3>
-      <p className={`${darkMode ? 'text-indigo-300' : 'text-gray-600'} text-sm mb-2`}>{pose.englishName}</p>
-      <p className={`${darkMode ? 'text-indigo-300' : 'text-gray-700'} mb-4`}>{pose.description}</p>
+      <p className={`text-sm mb-2 ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>{pose.englishName}</p>
+      <p className={`${darkMode ? 'text-indigo-300' : 'text-gray-600'} mb-4`}>{pose.description}</p>
 
       <div className={`flex justify-between text-sm ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
         <div className="flex items-center">
@@ -490,14 +488,8 @@ const PoseCard = ({ pose, onStartPractice, darkMode }) => {
       <button
         onClick={() => onStartPractice(pose)}
         aria-label={`Start ${pose.englishName} practice`}
-        className={`mt-5 w-full py-3 rounded-xl font-medium transition-all duration-500 flex items-center justify-center ${
-          isHovered
-            ? 'text-white shadow-lg'
-            : darkMode
-            ? 'text-indigo-200'
-            : 'text-gray-700'
-        }`}
-        style={{ backgroundColor: isHovered ? pose.chakraColor : darkMode ? '#1F2937' : '#F3F4F6' }}
+        className={`mt-5 w-full py-3 rounded-xl font-medium transition-all duration-500 flex items-center justify-center ${isHovered ? 'text-white shadow-lg' : (darkMode ? 'text-indigo-200' : 'text-gray-800')}`}
+        style={{ backgroundColor: isHovered ? pose.chakraColor : (darkMode ? '#1F2937' : '#F3F4F6') }}
       >
         Start Practice {isHovered && <ArrowRight size={16} className="ml-2" />}
       </button>
@@ -505,14 +497,14 @@ const PoseCard = ({ pose, onStartPractice, darkMode }) => {
   );
 };
 
-// Enhanced futuristic chakra card for dark mode
+// Enhanced futuristic chakra card
 const ChakraCard = ({ chakra, isActive, onClick, darkMode }) => {
   return (
     <div
-      className={`rounded-2xl shadow-lg p-6 transition-all duration-500 cursor-pointer ${isActive ? 'border-2 scale-105' : 'border'} ${darkMode ? (isActive ? '' : 'border-gray-800 bg-gray-900') : (isActive ? '' : 'border-gray-200 bg-white')}`}
+      className={`rounded-2xl shadow-lg p-6 transition-all duration-500 cursor-pointer ${isActive ? 'border-2 scale-105' : `border ${darkMode ? 'border-gray-800' : 'border-gray-200'} ${darkMode ? 'bg-gray-900' : 'bg-white'}`}`}
       style={{
         borderColor: isActive ? chakra.color : '',
-        backgroundColor: isActive ? (darkMode ? `${chakra.color}20` : `${chakra.color}10`) : (darkMode ? 'rgb(17, 24, 39)' : 'white')
+        backgroundColor: isActive ? `${chakra.color}20` : (darkMode ? 'rgb(17, 24, 39)' : 'white')
       }}
       onClick={() => onClick(chakra)}
       role="button"
@@ -532,11 +524,11 @@ const ChakraCard = ({ chakra, isActive, onClick, darkMode }) => {
           <p className={`text-sm ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>{chakra.englishName}</p>
         </div>
       </div>
-      <div className={`flex items-center text-sm ${darkMode ? 'text-indigo-300' : 'text-gray-700'} mb-2`}>
+      <div className={`flex items-center text-sm ${darkMode ? 'text-indigo-300' : 'text-gray-600'} mb-2`}>
         <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: chakra.color }}></div>
         <span>{chakra.location}</span>
       </div>
-      <div className={`flex items-center text-sm ${darkMode ? 'text-indigo-300' : 'text-gray-700'}`}>
+      <div className={`flex items-center text-sm ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
         <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: chakra.color }}></div>
         <span>Element: {chakra.element}</span>
       </div>
@@ -544,11 +536,11 @@ const ChakraCard = ({ chakra, isActive, onClick, darkMode }) => {
   );
 };
 
-// Enhanced futuristic testimonial card for dark mode
+// Enhanced futuristic testimonial card
 const TestimonialCard = ({ testimonial, darkMode }) => {
   return (
     <div className={`${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} p-6 rounded-2xl shadow-lg border relative overflow-hidden group hover:shadow-xl transition-all duration-300`}>
-      <div className="absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl opacity-10 group-hover:opacity-20 transition-opacity bg-indigo-500"></div>
+      <div className={`absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl opacity-10 group-hover:opacity-20 transition-opacity ${darkMode ? 'bg-indigo-500' : 'bg-indigo-300'}`}></div>
 
       <div className="relative z-10">
         <div className="flex mb-3">
@@ -557,30 +549,30 @@ const TestimonialCard = ({ testimonial, darkMode }) => {
           ))}
         </div>
 
-        <p className={`italic mb-6 ${darkMode ? 'text-indigo-300' : 'text-gray-700'}`}>"{testimonial.quote}"</p>
+        <p className={`italic mb-6 ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>"{testimonial.quote}"</p>
 
         <div className="flex items-center">
           <img
             src={testimonial.avatar}
             alt={`Avatar of ${testimonial.name}`}
-            className="w-10 h-10 rounded-full mr-3 border-2 border-indigo-500"
+            className={`w-10 h-10 rounded-full mr-3 border-2 ${darkMode ? 'border-indigo-500' : 'border-indigo-300'}`}
           />
           <p className={`font-semibold ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>{testimonial.name}</p>
         </div>
       </div>
- </div>
+    </div>
   );
 };
 
-// Enhanced futuristic progress stat component for dark mode
+// Enhanced futuristic progress stat component
 const ProgressStat = ({ icon, label, value, color = "teal", darkMode }) => {
   return (
     <div className={`${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} rounded-2xl shadow-lg p-5 border transform transition-transform hover:scale-105`}>
-      <div className={`p-3 rounded-xl mb-3 flex justify-center`} style={{ backgroundColor: darkMode ? `${color}30` : `${color}20` }}>
+      <div className={`p-3 rounded-xl mb-3 flex justify-center`} style={{ backgroundColor: `${color}30` }}>
         {React.cloneElement(icon, { style: { color } })}
       </div>
-      <span className={`text-2xl font-bold ${darkMode ? 'text-indigo-200' : 'text-gray-800'} block text-center`}>{value}</span>
-      <span className={`${darkMode ? 'text-indigo-300' : 'text-gray-600'} text-sm block text-center`}>{label}</span>
+      <span className={`text-2xl font-bold block text-center ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>{value}</span>
+      <span className={`text-sm block text-center ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>{label}</span>
     </div>
   );
 };
@@ -605,8 +597,8 @@ const ChakraBalance = ({ chakraBalance, darkMode }) => {
         {chakraBalance.map((chakra) => (
           <div key={chakra.name} className="relative">
             <div className="flex justify-between mb-1">
-              <span className={`${darkMode ? 'text-indigo-300' : 'text-gray-700'} text-sm`}>{chakra.name}</span>
-              <span className={`${darkMode ? 'text-indigo-200' : 'text-gray-800'} text-sm font-medium`}>{chakra.value}%</span>
+              <span className={`text-sm ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>{chakra.name}</span>
+              <span className={`text-sm font-medium ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>{chakra.value}%</span>
             </div>
             <div className={`w-full h-2 ${darkMode ? 'bg-gray-800' : 'bg-gray-200'} rounded-full overflow-hidden`}>
               <div
@@ -622,12 +614,12 @@ const ChakraBalance = ({ chakraBalance, darkMode }) => {
         ))}
       </div>
 
-      <div className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full blur-2xl opacity-10" style={{ backgroundColor: "#5C75FF" }}></div>
+      <div className={`absolute -bottom-10 -right-10 w-40 h-40 rounded-full blur-2xl opacity-10`} style={{ backgroundColor: darkMode ? "#5C75FF" : "#4B5EAA" }}></div>
     </div>
   );
 };
 
-// Enhanced achievement card component for dark mode
+// Enhanced achievement card component
 const AchievementCard = ({ achievement, darkMode }) => {
   return (
     <div className={`${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} p-4 rounded-xl shadow-md border flex items-center justify-between transition-transform hover:scale-105`}>
@@ -637,7 +629,7 @@ const AchievementCard = ({ achievement, darkMode }) => {
             <Check size={16} className="text-white" />
           </div>
         ) : (
-          <div className="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center mr-3">
+          <div className={`w-8 h-8 rounded-full ${darkMode ? 'bg-gray-400' : 'bg-gray-300'} flex items-center justify-center mr-3`}>
             <Medal size={16} className="text-white" />
           </div>
         )}
@@ -649,15 +641,14 @@ const AchievementCard = ({ achievement, darkMode }) => {
       {achievement.completed ? (
         <span className="px-2 py-1 text-xs rounded-full text-white bg-green-500">Complete</span>
       ) : (
-        <span className="px-2 py-1 text-xs rounded-full bg-gray-200 text-gray-700">In Progress</span>
+        <span className={`px-2 py-1 text-xs rounded-full ${darkMode ? 'bg-gray-200 text-gray-700' : 'bg-gray-100 text-gray-600'}`}>In Progress</span>
       )}
     </div>
   );
 };
 
-// Main ZenturaApp component
-const Home = () => {
-  const [darkMode, setDarkMode] = useState(true);
+// Main Home component
+const Home = ({ darkMode }) => {
   const [selectedPose, setSelectedPose] = useState(null);
   const [showTimer, setShowTimer] = useState(false);
   const [activeChakra, setActiveChakra] = useState(chakraInfo[0]);
@@ -665,10 +656,6 @@ const Home = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
 
   const startPractice = (pose) => {
     setSelectedPose(pose);
@@ -691,82 +678,10 @@ const Home = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-500 ${darkMode ? 'bg-gray-950 text-white' : 'bg-gray-50 text-gray-900'}`}>
-      {darkMode && (
-        <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-10 animate-pulse" style={{ backgroundColor: "#5CD9FF", animationDuration: '15s', willChange: 'transform' }}></div>
-          <div className="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full blur-3xl opacity-5 animate-pulse" style={{ backgroundColor: "#FF5F5F", animationDuration: '20s', willChange: 'transform' }}></div>
-        </div>
-      )}
-
-      {/* Header with Navbar */}
-      {/* <header className={`${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} shadow-lg border-b sticky top-0 z-40`}>
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center space-x-6">
-            <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/')}>
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                <Sparkles size={20} className="text-white" />
-              </div>
-              <h1 className={`text-2xl font-bold ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>Zentura</h1>
-            </div>
-
-            <nav className="hidden md:flex space-x-6">
-              <button
-                onClick={() => navigate('/dashboard')}
-                className={`${location.pathname === '/dashboard' ? (darkMode ? 'text-indigo-400' : 'text-indigo-600') : (darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500')} font-medium transition-colors`}
-                aria-label="Go to dashboard"
-              >
-                Dashboard
-              </button>
-              <button
-                onClick={() => navigate('/poses')}
-                className={`${location.pathname === '/poses' ? (darkMode ? 'text-indigo-400' : 'text-indigo-600') : (darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500')} font-medium transition-colors`}
-                aria-label="Go to poses"
-              >
-                Poses
-              </button>
-              <button
-                onClick={() => navigate('/diagnostics')}
-                className={`${location.pathname === '/diagnostics' ? (darkMode ? 'text-indigo-400' : 'text-indigo-600') : (darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500')} font-medium transition-colors`}
-                aria-label="Go to chakra diagnostics"
-              >
-                Chakra Diagnostics
-              </button>
-              <button
-                onClick={() => navigate('/community')}
-                className={`${location.pathname === '/community' ? (darkMode ? 'text-indigo-400' : 'text-indigo-600') : (darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500')} font-medium transition-colors`}
-                aria-label="Go to community"
-              >
-                Community
-              </button>
-              <button
-                onClick={() => navigate('/about')}
-                className={`${location.pathname === '/about' ? (darkMode ? 'text-indigo-400' : 'text-indigo-600') : (darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500')} font-medium transition-colors`}
-                aria-label="Go to about"
-              >
-                About
-              </button>
-            </nav>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <div className={`${darkMode ? 'bg-gray-800 text-indigo-200' : 'bg-gray-100 text-gray-800'} px-3 py-1 rounded-full flex items-center`}>
-              <Crown size={16} className="mr-1 text-yellow-500" />
-              <span className="font-medium">Level {userProgress.level}</span>
-            </div>
-            <div className={`${darkMode ? 'bg-gray-800 text-indigo-200' : 'bg-gray-100 text-gray-800'} px-3 py-1 rounded-full flex items-center`}>
-              <Trophy size={16} className="mr-1 text-orange-500" />
-              <span className="font-medium">{userProgress.totalPoints} pts</span>
-            </div>
-            <button
-              onClick={toggleDarkMode}
-              aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-              className={`p-2 rounded-full ${darkMode ? 'bg-gray-800 text-yellow-400' : 'bg-gray-200 text-indigo-800'}`}
-            >
-              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-          </div>
-        </div>
-      </header> */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className={`absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-10 animate-pulse`} style={{ backgroundColor: darkMode ? "#5CD9FF" : "#A0CFFF", animationDuration: '15s', willChange: 'transform' }}></div>
+        <div className={`absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full blur-3xl opacity-5 animate-pulse`} style={{ backgroundColor: darkMode ? "#FF5F5F" : "#FF9999", animationDuration: '20s', willChange: 'transform' }}></div>
+      </div>
 
       <main className="container mx-auto px-4 py-8">
         {/* Hero section */}
@@ -774,51 +689,51 @@ const Home = () => {
           <AnimatedElement delay={100}>
             <div className={`${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} rounded-3xl shadow-xl border p-8 md:p-12 relative overflow-hidden`}>
               <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -bottom-20 -right-20 w-80 h-80 rounded-full blur-3xl opacity-10" style={{ backgroundColor: "#5CD9FF" }}></div>
-                <div className="absolute top-20 -left-20 w-60 h-60 rounded-full blur-3xl opacity-10" style={{ backgroundColor: "#FF5F5F" }}></div>
+                <div className={`absolute -bottom-20 -right-20 w-80 h-80 rounded-full blur-3xl opacity-10`} style={{ backgroundColor: darkMode ? "#5CD9FF" : "#A0CFFF" }}></div>
+                <div className={`absolute top-20 -left-20 w-60 h-60 rounded-full blur-3xl opacity-10`} style={{ backgroundColor: darkMode ? "#FF5F5F" : "#FF9999" }}></div>
               </div>
 
               <div className="relative z-10 flex flex-col md:flex-row items-center">
-  <div className="md:w-2/3 mb-8 md:mb-0 md:pr-8">
-    <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>
-      Elevate Your Yoga Journey Through <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-600">Chakra Balance</span>
-    </h2>
-    <p className={`text-lg mb-6 ${darkMode ? 'text-indigo-300' : 'text-gray-700'}`}>
-      Track your progress, unlock achievements, and balance your energy centers with our futuristic yoga practice system.
-    </p>
-    <div className="flex flex-wrap gap-4">
-      <button
-        className="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium rounded-xl shadow-lg hover:opacity-90 transition-opacity flex items-center"
-        aria-label="View daily challenge"
-      >
-        <Medal size={18} className="mr-2" /> View Daily Challenge
-      </button>
-      <button
-        className={`px-6 py-3 ${darkMode ? 'bg-gray-800 text-indigo-200' : 'bg-gray-100 text-gray-800'} font-medium rounded-xl shadow hover:opacity-90 transition-opacity flex items-center`}
-        aria-label="Schedule practice"
-      >
-        <Calendar size={18} className="mr-2" /> Schedule Practice
-      </button>
-    </div>
-  </div>
+                <div className="md:w-2/3 mb-8 md:mb-0 md:pr-8">
+                  <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>
+                    Elevate Your Yoga Journey Through <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-600">Chakra Balance</span>
+                  </h2>
+                  <p className={`text-lg mb-6 ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
+                    Track your progress, unlock achievements, and balance your energy centers with our futuristic yoga practice system.
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    <button
+                      className="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium rounded-xl shadow-lg hover:opacity-90 transition-opacity flex items-center"
+                      aria-label="View daily challenge"
+                    >
+                      <Medal size={18} className="mr-2" /> View Daily Challenge
+                    </button>
+                    <button
+                      className={`px-6 py-3 ${darkMode ? 'bg-gray-800 text-indigo-200' : 'bg-gray-100 text-gray-800'} font-medium rounded-xl shadow hover:opacity-90 transition-opacity flex items-center`}
+                      aria-label="Schedule practice"
+                    >
+                      <Calendar size={18} className="mr-2" /> Schedule Practice
+                    </button>
+                  </div>
+                </div>
                 <div className="md:w-1/3 flex justify-center">
                   <div className="w-48 h-48 relative">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 opacity-20 blur-xl animate-pulse"></div>
+                    <div className={`absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 opacity-20 blur-xl animate-pulse`}></div>
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <Diamond size={100} className="text-indigo-400" />
+                      <Diamond size={100} className={`${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`} />
                     </div>
-                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-indigo-500 animate-spin" style={{ animationDuration: '15s', willChange: 'transform' }}></div>
-                    <div className="absolute inset-3 rounded-full border border-dashed border-purple-500 animate-spin" style={{ animationDuration: '10s', animationDirection: 'reverse', willChange: 'transform' }}></div>
+                    <div className={`absolute inset-0 rounded-full border-2 border-dashed ${darkMode ? 'border-indigo-500' : 'border-indigo-300'} animate-spin`} style={{ animationDuration: '15s', willChange: 'transform' }}></div>
+                    <div className={`absolute inset-3 rounded-full border border-dashed ${darkMode ? 'border-purple-500' : 'border-purple-300'} animate-spin`} style={{ animationDuration: '10s', animationDirection: 'reverse', willChange: 'transform' }}></div>
                   </div>
                 </div>
               </div>
 
               {/* Progress stats */}
               <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-                <ProgressStat icon={<Flame size={24} />} label="Day Streak" value={userProgress.streak} color="#FF5F5F" darkMode={darkMode} />
-                <ProgressStat icon={<Award size={24} />} label="Badges" value={userProgress.badges} color="#FF9D5C" darkMode={darkMode} />
-                <ProgressStat icon={<Trophy size={24} />} label="Challenges" value={userProgress.completedChallenges} color="#5CFF8F" darkMode={darkMode} />
-                <ProgressStat icon={<Star size={24} />} label="Rank" value={userProgress.rank} color="#5C75FF" darkMode={darkMode} />
+                <ProgressStat darkMode={darkMode} icon={<Flame size={24} />} label="Day Streak" value={userProgress.streak} color="#FF5F5F" />
+                <ProgressStat darkMode={darkMode} icon={<Award size={24} />} label="Badges" value={userProgress.badges} color="#FF9D5C" />
+                <ProgressStat darkMode={darkMode} icon={<Trophy size={24} />} label="Challenges" value={userProgress.completedChallenges} color="#5CFF8F" />
+                <ProgressStat darkMode={darkMode} icon={<Star size={24} />} label="Rank" value={userProgress.rank} color="#5C75FF" />
               </div>
             </div>
           </AnimatedElement>
@@ -864,7 +779,7 @@ const Home = () => {
                 <button
                   onClick={() => setChakraDetailExpanded(false)}
                   aria-label="Close chakra details"
-                  className={`absolute top-4 right-4 ${darkMode ? 'text-indigo-400 hover:text-indigo-200' : 'text-gray-500 hover:text-gray-800'}`}
+                  className={`absolute top-4 right-4 ${darkMode ? 'text-indigo-400 hover:text-indigo-200' : 'text-gray-500 hover:text-gray-700'}`}
                 >
                   <XCircle size={24} />
                 </button>
@@ -884,23 +799,23 @@ const Home = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   <div className="md:col-span-2">
-                    <p className={`text-lg mb-6 ${darkMode ? 'text-indigo-300' : 'text-gray-700'}`}>{activeChakra.description}</p>
+                    <p className={`text-lg mb-6 ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>{activeChakra.description}</p>
 
-                    <div className={`mb-6 p-4 rounded-xl ${darkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-50'}`}>
+                    <div className={`${darkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'} mb-6 p-4 rounded-xl`}>
                       <h3 className={`font-semibold mb-3 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>Benefits:</h3>
-                      <ul className={`space-y-2 ${darkMode ? 'text-indigo-300' : 'text-gray-700'}`}>
+                      <ul className={`space-y-2 ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
                         {activeChakra.benefits.map((benefit, index) => (
                           <li key={index} className="flex items-center">
-                            <ShieldCheck size={16} className="mr-2" style={{ color: activeChakra.color }} />
+                            <Shield argueCheck size={16} className="mr-2" style={{ color: activeChakra.color }} />
                             {benefit}
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className={`p-4 rounded-xl ${darkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-50'}`}>
+                    <div className={`${darkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'} p-4 rounded-xl`}>
                       <h3 className={`font-semibold mb-2 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>Affirmation:</h3>
-                      <p className={`text-lg italic ${darkMode ? 'text-indigo-300' : 'text-gray-700'}`}>"{activeChakra.affirmation}"</p>
+                      <p className={`text-lg italic ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>"{activeChakra.affirmation}"</p>
                     </div>
                   </div>
 
@@ -913,7 +828,7 @@ const Home = () => {
                         alt={`Symbol for ${activeChakra.englishName}`}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                      <div className={`absolute inset-0 bg-gradient-to-t ${darkMode ? 'from-black' : 'from-gray-800'} to-transparent opacity-60`}></div>
                       <div className="absolute bottom-4 left-4 right-4">
                         <div
                           className="px-3 py-1 rounded-full text-white text-sm inline-flex items-center"
@@ -923,9 +838,9 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
-                    <div className={`p-4 rounded-xl ${darkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-50'}`}>
+                    <div className={`${darkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'} p-4 rounded-xl`}>
                       <h3 className={`font-semibold mb-3 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>Recommended Poses:</h3>
-                      <ul className={`space-y-2 ${darkMode ? 'text-indigo-300' : 'text-gray-700'}`}>
+                      <ul className={`space-y-2 ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
                         {activeChakra.poses.map((pose, index) => (
                           <li key={index} className="flex items-center">
                             <ArrowRight size={16} className="mr-2" style={{ color: activeChakra.color }} />
@@ -949,7 +864,7 @@ const Home = () => {
                 {activeChakra.englishName} Poses
               </h2>
               <button
-                className={`flex items-center ${darkMode ? 'text-indigo-400 hover:text-indigo-200' : 'text-indigo-600 hover:text-indigo-800'}`}
+                className={`flex items-center ${darkMode ? 'text-indigo-400 hover:text-indigo-200' : 'text-gray-500 hover:text-gray-700'}`}
                 aria-label="See all poses"
               >
                 See All <ArrowRight size={18} className="ml-1" />
@@ -979,7 +894,7 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <ChakraBalance chakraBalance={userProgress.chakraBalance} darkMode={darkMode} />
               <div className="md:col-span-2">
-                <div className={`${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} rounded W-2xl shadow-lg border p-6`}>
+                <div className={`${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} rounded-2xl shadow-lg border p-6`}>
                   <h3 className={`text-xl font-bold mb-4 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>Achievements</h3>
                   <div className="space-y-4">
                     {userProgress.achievements.map((achievement, index) => (
