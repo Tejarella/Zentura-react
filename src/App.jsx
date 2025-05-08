@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import { Sun, Moon, Crown, Trophy, Instagram, Twitter, Facebook, Sparkles } from 'lucide-react';
 import Home from './pages/Home';
 import DashboardPage from './pages/Dashboard';
@@ -22,50 +22,86 @@ const ZenturaApp = () => {
         <header className={`${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} shadow-lg border-b sticky top-0 z-40`}>
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="flex items-center space-x-6">
-              <Link to="/" className="flex items-center space-x-2">
+              <NavLink to="/" className="flex items-center space-x-2">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
                   <Sparkles size={20} className="text-white" />
                 </div>
-                <h1 className={`text-2xl font-bold ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>Zentura</h1>
-              </Link>
+                <h1 className={`text-2xl font-bold ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>ZenYogi</h1>
+              </NavLink>
 
               <nav className="hidden md:flex space-x-6">
-                <Link
+                <NavLink
                   to="/"
-                  className={`${darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500'} font-medium transition-colors`}
+                  className={({ isActive }) => 
+                    `font-medium transition-colors pb-1 ${
+                      isActive 
+                        ? `${darkMode ? 'text-indigo-300' : 'text-indigo-600'} border-b-2 border-indigo-500` 
+                        : `${darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500'}`
+                    }`
+                  }
                 >
                   Home
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                   to="/dashboard"
-                  className={`${darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500'} font-medium transition-colors`}
+                  className={({ isActive }) => 
+                    `font-medium transition-colors pb-1 ${
+                      isActive 
+                        ? `${darkMode ? 'text-indigo-300' : 'text-indigo-600'} border-b-2 border-indigo-500` 
+                        : `${darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500'}`
+                    }`
+                  }
                 >
                   Dashboard
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                   to="/poses"
-                  className={`${darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500'} font-medium transition-colors`}
+                  className={({ isActive }) => 
+                    `font-medium transition-colors pb-1 ${
+                      isActive 
+                        ? `${darkMode ? 'text-indigo-300' : 'text-indigo-600'} border-b-2 border-indigo-500` 
+                        : `${darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500'}`
+                    }`
+                  }
                 >
                   Poses
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                   to="/diagnostics"
-                  className={`${darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500'} font-medium transition-colors`}
+                  className={({ isActive }) => 
+                    `font-medium transition-colors pb-1 ${
+                      isActive 
+                        ? `${darkMode ? 'text-indigo-300' : 'text-indigo-600'} border-b-2 border-indigo-500` 
+                        : `${darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500'}`
+                    }`
+                  }
                 >
                   Chakra Diagnostics
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                   to="/community"
-                  className={`${darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500'} font-medium transition-colors`}
+                  className={({ isActive }) => 
+                    `font-medium transition-colors pb-1 ${
+                      isActive 
+                        ? `${darkMode ? 'text-indigo-300' : 'text-indigo-600'} border-b-2 border-indigo-500` 
+                        : `${darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500'}`
+                    }`
+                  }
                 >
                   Community
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                   to="/about"
-                  className={`${darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500'} font-medium transition-colors`}
+                  className={({ isActive }) => 
+                    `font-medium transition-colors pb-1 ${
+                      isActive 
+                        ? `${darkMode ? 'text-indigo-300' : 'text-indigo-600'} border-b-2 border-indigo-500` 
+                        : `${darkMode ? 'text-gray-400 hover:text-indigo-300' : 'text-gray-600 hover:text-indigo-500'}`
+                    }`
+                  }
                 >
                   About
-                </Link>
+                </NavLink>
               </nav>
             </div>
 
@@ -100,104 +136,87 @@ const ZenturaApp = () => {
           </Routes>
         </main>
 
-        {/* Footer remains the same */}
-         {/* Footer */}
-              <footer className={`mt-20 ${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-gray-100 border-gray-200'} border-t py-12`}>
-                <div className="container mx-auto px-4">
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div>
-                      <div className="flex items-center space-x-2 mb-4">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                          <Sparkles size={16} className="text-white" />
-                        </div>
-                        <h3 className={`text-xl font-bold ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>Zentura</h3>
-                      </div>
-                      <p className={`${darkMode ? 'text-indigo-300' : 'text-gray-600'} mb-4`}>
-                        Experience yoga practice that balances your chakras and elevates your spiritual journey.
-                      </p>
-                      <div className="flex space-x-4">
-                        <a href="#" className={`${darkMode ? 'text-gray-400 hover:text-indigo-400' : 'text-gray-500 hover:text-indigo-600'}`} aria-label="Instagram">
-                          <Instagram size={20} />
-                        </a>
-                        <a href="#" className={`${darkMode ? 'text-gray-400 hover:text-indigo-400' : 'text-gray-500 hover:text-indigo-600'}`} aria-label="Facebook">
-                          <Facebook size={20} />
-                        </a>
-                        <a href="#" className={`${darkMode ? 'text-gray-400 hover:text-indigo-400' : 'text-gray-500 hover:text-indigo-600'}`} aria-label="Twitter">
-                          <Twitter size={20} />
-                        </a>
-                      </div>
-                    </div>
-        
-                    <div>
-                      <h4 className={`font-bold mb-4 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>Quick Links</h4>
-                      <ul className={`space-y-2 ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
-                        <li><a href="#" className="hover:underline">Home</a></li>
-                        <li><a href="#" className="hover:underline">About</a></li>
-                        <li><a href="#" className="hover:underline">Chakras</a></li>
-                        <li><a href="#" className="hover:underline">Poses</a></li>
-                        <li><a href="#" className="hover:underline">Contact</a></li>
-                      </ul>
-                    </div>
-        
-                    <div>
-                      <h4 className={`font-bold mb-4 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>Resources</h4>
-                      <ul className={`space-y-2 ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
-                        <li><a href="#" className="hover:underline">Yoga Guides</a></li>
-                        <li><a href="#" className="hover:underline">Meditation Techniques</a></li>
-                        <li><a href="#" className="hover:underline">Chakra Healing</a></li>
-                        <li><a href="#" className="hover:underline">Mindfulness Practices</a></li>
-                        <li><a href="#" className="hover:underline">Retreats</a></li>
-                      </ul>
-                    </div>
-        
-                    <div>
-                      <h4 className={`font-bold mb-4 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>Subscribe</h4>
-                      <p className={`${darkMode ? 'text-indigo-300' : 'text-gray-600'} mb-4`}>
-                        Get weekly insights and spiritual guidance.
-                      </p>
-                      <div className="flex">
-                        <input
-                          type="email"
-                          placeholder="Your email"
-                          aria-label="Email for subscription"
-                          className={`flex-1 px-3 py-2 rounded-l-lg ${darkMode ? 'bg-gray-800 text-white border-gray-700' : 'bg-white text-gray-800 border-gray-300'} border focus:outline-none`}
-                        />
-                        <button
-                          className="px-4 py-2 bg-indigo-600 text-white rounded-r-lg hover:bg-indigo-700"
-                          aria-label="Subscribe to newsletter"
-                        >
-                          Subscribe
-                        </button>
-                      </div>
-                    </div>
+        {/* Footer */}
+        <footer className={`mt-20 ${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-gray-100 border-gray-200'} border-t py-12`}>
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div>
+                <div className="flex items-center space-x-2 mb-4">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                    <Sparkles size={16} className="text-white" />
                   </div>
-        
-                  <div className={`mt-12 pt-6 ${darkMode ? 'border-gray-800' : 'border-gray-200'} border-t text-center`}>
-                    <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                      © {new Date().getFullYear()} Zentura. All rights reserved.
-                    </p>
-                  </div>
+                  <h3 className={`text-xl font-bold ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>ZenYogi</h3>
                 </div>
-              </footer>
+                <p className={`${darkMode ? 'text-indigo-300' : 'text-gray-600'} mb-4`}>
+                  Experience yoga practice that balances your chakras and elevates your spiritual journey.
+                </p>
+                <div className="flex space-x-4">
+                  <a href="#" className={`${darkMode ? 'text-gray-400 hover:text-indigo-400' : 'text-gray-500 hover:text-indigo-600'}`} aria-label="Instagram">
+                    <Instagram size={20} />
+                  </a>
+                  <a href="#" className={`${darkMode ? 'text-gray-400 hover:text-indigo-400' : 'text-gray-500 hover:text-indigo-600'}`} aria-label="Facebook">
+                    <Facebook size={20} />
+                  </a>
+                  <a href="#" className={`${darkMode ? 'text-gray-400 hover:text-indigo-400' : 'text-gray-500 hover:text-indigo-600'}`} aria-label="Twitter">
+                    <Twitter size={20} />
+                  </a>
+                </div>
+              </div>
+    
+              <div>
+                <h4 className={`font-bold mb-4 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>Quick Links</h4>
+                <ul className={`space-y-2 ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
+                  <li><a href="#" className="hover:underline">Home</a></li>
+                  <li><a href="#" className="hover:underline">About</a></li>
+                  <li><a href="#" className="hover:underline">Chakras</a></li>
+                  <li><a href="#" className="hover:underline">Poses</a></li>
+                  <li><a href="#" className="hover:underline">Contact</a></li>
+                </ul>
+              </div>
+    
+              <div>
+                <h4 className={`font-bold mb-4 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>Resources</h4>
+                <ul className={`space-y-2 ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
+                  <li><a href="#" className="hover:underline">Yoga Guides</a></li>
+                  <li><a href="#" className="hover:underline">Meditation Techniques</a></li>
+                  <li><a href="#" className="hover:underline">Chakra Healing</a></li>
+                  <li><a href="#" className="hover:underline">Mindfulness Practices</a></li>
+                  <li><a href="#" className="hover:underline">Retreats</a></li>
+                </ul>
+              </div>
+    
+              <div>
+                <h4 className={`font-bold mb-4 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>Subscribe</h4>
+                <p className={`${darkMode ? 'text-indigo-300' : 'text-gray-600'} mb-4`}>
+                  Get weekly insights and spiritual guidance.
+                </p>
+                <div className="flex">
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    aria-label="Email for subscription"
+                    className={`flex-1 px-3 py-2 rounded-l-lg ${darkMode ? 'bg-gray-800 text-white border-gray-700' : 'bg-white text-gray-800 border-gray-300'} border focus:outline-none`}
+                  />
+                  <button
+                    className="px-4 py-2 bg-indigo-600 text-white rounded-r-lg hover:bg-indigo-700"
+                    aria-label="Subscribe to newsletter"
+                  >
+                    Subscribe
+                  </button>
+                </div>
+              </div>
+            </div>
+    
+            <div className={`mt-12 pt-6 ${darkMode ? 'border-gray-800' : 'border-gray-200'} border-t text-center`}>
+              <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                © {new Date().getFullYear()} ZenYogi. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </footer>
       </div>
     </Router>
   );
 };
 
-
 export default ZenturaApp;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
