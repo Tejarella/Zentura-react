@@ -8,7 +8,6 @@ import {
 
 // Import placeholder yoga pose images (using placeholder API in real app)
 const poseImages = {
-  // Each pose would have a real image in production
   "Tadasana": "https://cdn.vectorstock.com/i/1000v/27/29/woman-doing-mountain-pose-tadasana-exercise-vector-41282729.jpg",
   "Virabhadrasana I": "https://static.vecteezy.com/system/resources/previews/015/397/727/non_2x/man-doing-virabhadrasana-i-to-the-wall-exercise-flat-illustration-isolated-on-white-background-vector.jpg",
   "Virabhadrasana II": "https://static.vecteezy.com/system/resources/previews/015/397/866/non_2x/yoga-man-in-virabhadrasana-2-or-warrior-ii-pose-male-cartoon-character-practicing-hatha-yoga-man-demonstrating-exercise-during-gymnastics-training-flat-illustration-vector.jpg",
@@ -243,7 +242,7 @@ const yogaPosesData = [
     chakraColor: "#AF5CFF",
     chakraDescription: "Enhances spiritual connection and clarity",
     category: "Inversion",
-    contraindications: ["Neck injuries", "High blood pressure", "Glaucoma", "Detached retina", "Heart conditions"],
+    contraindications: [" Neck injuries", "High blood pressure", "Glaucoma", "Detached retina", "Heart conditions"],
     alignment: "Forearms on ground forming triangle with hands clasped. Top of head on floor. Walk feet in and lift with core strength.",
     modifications: "Practice against wall. Try half headstand with bent knees. Use dolphin pose to build strength."
   },
@@ -394,7 +393,7 @@ const difficultyLevels = [
 const VideoModal = ({ pose, onClose, darkMode }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 backdrop-blur-sm">
-      <div className={`${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-2xl p-6 max-w-3xl w-full mx-4 border ${darkMode ? 'border-indigo-900' : 'border-gray-200'} shadow-2xl relative`}>
+      <div className={`${darkMode ? 'bg-gray-900 border-indigo-900' : 'bg-white border-gray-200'} rounded-2xl p-6 max-w-3xl w-full mx-4 border shadow-2xl relative`}>
         <div className="flex justify-between items-center mb-4">
           <h3 className={`text-xl font-bold ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>
             {pose.name} <span className={`${darkMode ? 'text-indigo-400' : 'text-gray-600'}`}>({pose.englishName})</span>
@@ -506,9 +505,9 @@ const TimerModal = ({ pose, onClose, darkMode }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 backdrop-blur-md">
-      <div className={`${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-3xl p-8 max-w-md w-full mx-4 border ${darkMode ? 'border-indigo-900' : 'border-gray-200'} shadow-2xl relative overflow-hidden`}>
+      <div className={`${darkMode ? 'bg-gray-900 border-indigo-900' : 'bg-white border-gray-200'} rounded-3xl p-8 max-w-md w-full mx-4 border shadow-2xl relative overflow-hidden`}>
         <div className={`absolute inset-0 ${darkMode ? 'bg-gradient-to-br from-gray-900 to-indigo-950' : 'bg-gradient-to-br from-white to-gray-50'} opacity-50`}></div>
-        <div className="absolute top-0 left-0 w-full h-1 bg-gray-800">
+        <div className={`absolute top-0 left-0 w-full h-1 ${darkMode ? 'bg-gray-800' : 'bg-gray-200'}`}>
           <div
             className="h-full bg-gradient-to-r"
             style={{
@@ -550,7 +549,7 @@ const TimerModal = ({ pose, onClose, darkMode }) => {
           <div className="flex justify-center mb-8">
             <div className={`w-40 h-40 rounded-full ${darkMode ? 'bg-gray-800' : 'bg-gray-100'} border-4 flex items-center justify-center relative`} style={{ borderColor: pose.chakraColor }}>
               <div className="absolute inset-0 rounded-full border-t-4 animate-spin" style={{ borderColor: pose.chakraColor, animationDuration: '10s', willChange: 'transform' }}></div>
-              <div className="absolute inset-0 rounded-full border-l-2 animate-spin" style={{ borderColor: '#5C75FF', animationDuration: '8s', animationDirection: 'reverse', willChange: 'transform' }}></div>
+              <div className="absolute inset-0 rounded-full border-l-2 animate-spin" style={{ borderColor: darkMode ? '#5C75FF' : '#4B5EAA', animationDuration: '8s', animationDirection: 'reverse', willChange: 'transform' }}></div>
               <div className={`text-4xl font-bold ${darkMode ? 'text-indigo-100' : 'text-gray-800'}`}>{formatTime(timeLeft)}</div>
             </div>
           </div>
@@ -579,7 +578,7 @@ const TimerModal = ({ pose, onClose, darkMode }) => {
                 <button
                   onClick={resetTimer}
                   aria-label="Reset timer"
-                  className={`py-2 rounded-lg font-medium ${darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-200 text-gray-700'} hover:opacity-90 transition-colors`}
+                  className={`py-2 rounded-lg font-medium ${darkMode ? 'bg-indigo-800 text-indigo-200 hover:bg-indigo-700' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'} transition-colors`}
                 >
                   Reset
                 </button>
@@ -620,7 +619,7 @@ const TimerModal = ({ pose, onClose, darkMode }) => {
 };
 
 // Main Application Component
-const YogaPoseLibrary = () => {
+const YogaPoseLibrary = ({ darkMode }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedChakra, setSelectedChakra] = useState("All Chakras");
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
@@ -630,7 +629,6 @@ const YogaPoseLibrary = () => {
   const [favoriteIDs, setFavoriteIDs] = useState([]);
   const [showVideo, setShowVideo] = useState(null);
   const [showTimer, setShowTimer] = useState(null);
-  const [darkMode, setDarkMode] = useState(true);
   const [showChakraFilter, setShowChakraFilter] = useState(false);
   const [showCategoryFilter, setShowCategoryFilter] = useState(false);
   const [showLevelFilter, setShowLevelFilter] = useState(false);
@@ -703,22 +701,15 @@ const YogaPoseLibrary = () => {
   }, [darkMode]);
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-gray-950 text-white' : 'bg-gray-100 text-gray-900'}`}>
+    <div className={`min-h-screen ${darkMode ? 'bg-gray-950 text-white' : 'bg-gray-100 text-gray-900'} transition-colors duration-500`}>
       {/* Header */}
-      <header className={`${darkMode ? 'bg-gray-900' : 'bg-white'} py-4 px-4 shadow-md sticky top-0 z-30`}>
+      <header className={`${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} py-4 px-4 shadow-md sticky top-0 z-30 border-b`}>
         <div className="max-w-6xl mx-auto">
-          {/* App Title and Theme Toggle */}
+          {/* App Title */}
           <div className="flex justify-between items-center mb-4">
             <h1 className={`text-2xl font-bold ${darkMode ? 'text-indigo-300' : 'text-indigo-600'}`}>
               Yoga Asana Library
             </h1>
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              className={`p-2 rounded-full ${darkMode ? 'bg-gray-800 text-indigo-300' : 'bg-gray-200 text-indigo-700'}`}
-              aria-label="Toggle dark mode"
-            >
-              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
           </div>
           
           {/* Search Bar */}
@@ -729,7 +720,7 @@ const YogaPoseLibrary = () => {
               placeholder="Search poses by name..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className={`w-full pl-10 pr-4 py-2 rounded-xl ${darkMode ? 'bg-gray-800 text-white placeholder-gray-500 border-gray-700' : 'bg-gray-50 border-gray-300 placeholder-gray-500'} border focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+              className={`w-full pl-10 pr-4 py-2 rounded-xl ${darkMode ? 'bg-gray-800 text-white placeholder-gray-500 border-gray-700' : 'bg-gray-50 text-gray-900 placeholder-gray-500 border-gray-300'} border focus:outline-none focus:ring-2 focus:ring-indigo-500`}
             />
           </div>
           
@@ -744,7 +735,7 @@ const YogaPoseLibrary = () => {
                   setShowLevelFilter(false);
                   setShowSortOptions(false);
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl ${darkMode ? 'bg-gray-800 text-white border-gray-700' : 'bg-white text-gray-700 border-gray-300'} border`}
+                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl ${darkMode ? 'bg-gray-800 text-white border-gray-700' : 'bg-white text-gray-700 border-gray-300'} border hover:bg-opacity-80 transition-colors`}
               >
                 <span className="truncate">
                   {selectedChakra}
@@ -780,7 +771,7 @@ const YogaPoseLibrary = () => {
                   setShowLevelFilter(false);
                   setShowSortOptions(false);
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl ${darkMode ? 'bg-gray-800 text-white border-gray-700' : 'bg-white text-gray-700 border-gray-300'} border`}
+                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl ${darkMode ? 'bg-gray-800 text-white border-gray-700' : 'bg-white text-gray-700 border-gray-300'} border hover:bg-opacity-80 transition-colors`}
               >
                 <span className="truncate">
                   {selectedCategory}
@@ -815,7 +806,7 @@ const YogaPoseLibrary = () => {
                   setShowCategoryFilter(false);
                   setShowSortOptions(false);
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl ${darkMode ? 'bg-gray-800 text-white border-gray-700' : 'bg-white text-gray-700 border-gray-300'} border`}
+                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl ${darkMode ? 'bg-gray-800 text-white border-gray-700' : 'bg-white text-gray-700 border-gray-300'} border hover:bg-opacity-80 transition-colors`}
               >
                 <span className="truncate">
                   {selectedLevel}
@@ -850,7 +841,7 @@ const YogaPoseLibrary = () => {
                   setShowCategoryFilter(false);
                   setShowLevelFilter(false);
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl ${darkMode ? 'bg-gray-800 text-white border-gray-700' : 'bg-white text-gray-700 border-gray-300'} border`}
+                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl ${darkMode ? 'bg-gray-800 text-white border-gray-700' : 'bg-white text-gray-700 border-gray-300'} border hover:bg-opacity-80 transition-colors`}
               >
                 <div className="flex items-center">
                   <ArrowUpDown size={16} className="mr-2" />
@@ -897,13 +888,13 @@ const YogaPoseLibrary = () => {
           
           {/* View mode toggle and result count */}
           <div className="flex justify-between items-center mt-4">
-            <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} text-sm`}>
+            <p className={`${darkMode ? 'text-indigo-400' : 'text-gray-600'} text-sm`}>
               Showing {filteredPoses.length} poses
             </p>
             <div className="flex space-x-2">
               <button
                 onClick={() => setViewMode("grid")}
-                className={`p-2 rounded-lg ${viewMode === "grid" ? (darkMode ? 'bg-indigo-700 text-white' : 'bg-indigo-100 text-indigo-700') : (darkMode ? 'text-gray-400' : 'text-gray-500')}`}
+                className={`p-2 rounded-lg ${viewMode === "grid" ? (darkMode ? 'bg-indigo-700 text-white' : 'bg-indigo-100 text-indigo-700') : (darkMode ? 'text-indigo-400 hover:bg-gray-800' : 'text-gray-500 hover:bg-gray-200')}`}
                 aria-label="Grid view"
               >
                 <div className="grid grid-cols-2 gap-1">
@@ -915,7 +906,7 @@ const YogaPoseLibrary = () => {
               </button>
               <button
                 onClick={() => setViewMode("list")}
-                className={`p-2 rounded-lg ${viewMode === "list" ? (darkMode ? 'bg-indigo-700 text-white' : 'bg-indigo-100 text-indigo-700') : (darkMode ? 'text-gray-400' : 'text-gray-500')}`}
+                className={`p-2 rounded-lg ${viewMode === "list" ? (darkMode ? 'bg-indigo-700 text-white' : 'bg-indigo-100 text-indigo-700') : (darkMode ? 'text-indigo-400 hover:bg-gray-800' : 'text-gray-500 hover:bg-gray-200')}`}
                 aria-label="List view"
               >
                 <div className="flex flex-col space-y-1">
@@ -932,9 +923,9 @@ const YogaPoseLibrary = () => {
       {/* Main Content */}
       <main className="max-w-6xl mx-auto p-4">
         {currentPoses.length === 0 ? (
-          <div className={`flex flex-col items-center justify-center py-12 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+          <div className={`flex flex-col items-center justify-center py-12 ${darkMode ? 'text-indigo-400' : 'text-gray-600'}`}>
             <AlertTriangle size={48} className="mb-4" />
-            <h3 className="text-xl font-semibold mb-2">No poses found</h3>
+            <h3 className={`text-xl font-semibold mb-2 ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>No poses found</h3>
             <p>Try adjusting your search or filters</p>
             <button
               onClick={() => {
@@ -943,7 +934,7 @@ const YogaPoseLibrary = () => {
                 setSelectedCategory("All Categories");
                 setSelectedLevel("All Levels");
               }}
-              className={`mt-4 px-4 py-2 rounded-lg ${darkMode ? 'bg-indigo-700 hover:bg-indigo-600' : 'bg-indigo-600 hover:bg-indigo-700'} text-white`}
+              className={`mt-4 px-4 py-2 rounded-lg ${darkMode ? 'bg-indigo-700 hover:bg-indigo-600 text-white' : 'bg-indigo-600 hover:bg-indigo-700 text-white'}`}
             >
               Reset Filters
             </button>
@@ -956,7 +947,7 @@ const YogaPoseLibrary = () => {
                 {currentPoses.map(pose => (
                   <div 
                     key={pose.id}
-                    className={`${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} rounded-xl border shadow-sm overflow-hidden transition-transform hover:shadow-md`}
+                    className={`${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} rounded-xl border shadow-sm overflow-hidden transition-transform hover:shadow-md hover:scale-105`}
                   >
                     {/* Card Image Area */}
                     <div className="relative h-48">
@@ -977,7 +968,7 @@ const YogaPoseLibrary = () => {
                             aria-label={favoriteIDs.includes(pose.id) ? "Remove from favorites" : "Add to favorites"}
                           >
                             <Star size={20} fill={favoriteIDs.includes(pose.id) ? "#FFEF5C" : "none"} 
-                              className={favoriteIDs.includes(pose.id) ? "text-yellow-300" : ""} />
+                              className={favoriteIDs.includes(pose.id) ? "text-yellow-300" : "text-white"} />
                           </button>
                         </div>
                         <p className="text-gray-200 text-sm">{pose.englishName}</p>
@@ -995,7 +986,7 @@ const YogaPoseLibrary = () => {
                       </div>
                       
                       {/* Points badge */}
-                      <div className="absolute top-4 right-4 px-2 py-1 rounded-md bg-gray-900 bg-opacity-70 text-xs font-medium text-white flex items-center">
+                      <div className={`absolute top-4 right-4 px-2 py-1 rounded-md ${darkMode ? 'bg-gray-900' : 'bg-gray-800'} bg-opacity-70 text-xs font-medium text-white flex items-center`}>
                         <Star size={12} className="mr-1 text-yellow-300" fill="#FFEF5C" />
                         {pose.points} pts
                       </div>
@@ -1006,24 +997,24 @@ const YogaPoseLibrary = () => {
                       {/* Chakra info */}
                       <div className="flex items-center mb-3">
                         <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: pose.chakraColor }}></div>
-                        <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                        <span className={`text-sm ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
                           {pose.chakra} Chakra
                         </span>
                       </div>
                       
                       {/* Description */}
-                      <p className={`mb-4 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-700'}`}>
+                      <p className={`mb-4 text-sm ${darkMode ? 'text-indigo-400' : 'text-gray-700'}`}>
                         {pose.description}
                       </p>
                       
                       {/* Benefits */}
                       <div className="mb-4">
-                        <h3 className={`text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Key Benefits:</h3>
+                        <h3 className={`text-sm font-medium mb-2 ${darkMode ? 'text-indigo-200' : 'text-gray-700'}`}>Key Benefits:</h3>
                         <div className="flex flex-wrap gap-1">
                           {pose.benefits.slice(0, 2).map((benefit, idx) => (
                             <span 
                               key={idx}
-                              className={`text-xs px-2 py-1 rounded-md ${darkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'}`}
+                              className={`text-xs px-2 py-1 rounded-md ${darkMode ? 'bg-gray-800 text-indigo-300' : 'bg-gray-100 text-gray-700'}`}
                             >
                               <Check size={10} className="inline mr-1" style={{ color: pose.chakraColor }} />
                               {benefit}
@@ -1031,7 +1022,7 @@ const YogaPoseLibrary = () => {
                           ))}
                           {pose.benefits.length > 2 && (
                             <span 
-                              className={`text-xs px-2 py-1 rounded-md ${darkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'}`}
+                              className={`text-xs px-2 py-1 rounded-md ${darkMode ? 'bg-gray-800 text-indigo-300' : 'bg-gray-100 text-gray-700'}`}
                             >
                               +{pose.benefits.length - 2} more
                             </span>
@@ -1041,8 +1032,8 @@ const YogaPoseLibrary = () => {
                       
                       {/* Duration */}
                       <div className="flex items-center mb-4">
-                        <Clock size={16} className={`mr-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} />
-                        <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        <Clock size={16} className={`mr-2 ${darkMode ? 'text-indigo-400' : 'text-gray-500'}`} />
+                        <span className={`text-sm ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
                           {pose.duration}
                         </span>
                       </div>
@@ -1051,14 +1042,14 @@ const YogaPoseLibrary = () => {
                       <div className="flex space-x-2">
                         <button
                           onClick={() => openVideo(pose)}
-                          className={`flex-1 py-2 px-3 rounded-lg flex items-center justify-center text-sm ${darkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                          className={`flex-1 py-2 px-3 rounded-lg flex items-center justify-center text-sm ${darkMode ? 'bg-gray-800 text-indigo-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                         >
                           <PlayCircle size={16} className="mr-1" />
                           Watch Demo
                         </button>
                         <button
                           onClick={() => startPractice(pose)}
-                          className="flex-1 py-2 px-3 rounded-lg flex items-center justify-center text-sm text-white"
+                          className="flex-1 py-2 px-3 rounded-lg flex items-center justify-center text-sm text-white hover:opacity-90"
                           style={{ backgroundColor: pose.chakraColor }}
                         >
                           <Timer size={16} className="mr-1" />
@@ -1077,7 +1068,7 @@ const YogaPoseLibrary = () => {
                 {currentPoses.map(pose => (
                   <div 
                     key={pose.id}
-                    className={`${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} rounded-xl border shadow-sm overflow-hidden flex`}
+                    className={`${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} rounded-xl border shadow-sm overflow-hidden flex hover:shadow-md transition-shadow`}
                   >
                     {/* Image */}
                     <div className="relative w-24 h-24 sm:w-32 sm:h-32">
@@ -1098,11 +1089,11 @@ const YogaPoseLibrary = () => {
                     <div className="flex-1 p-3 flex flex-col">
                       <div className="flex justify-between">
                         <div>
-                          <h2 className={`font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{pose.name}</h2>
-                          <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{pose.englishName}</p>
+                          <h2 className={`font-bold ${darkMode ? 'text-indigo-200' : 'text-gray-800'}`}>{pose.name}</h2>
+                          <p className={`text-sm ${darkMode ? 'text-indigo-400' : 'text-gray-600'}`}>{pose.englishName}</p>
                         </div>
                         <div className="flex items-center">
-                          <span className={`flex items-center text-sm mr-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                          <span className={`flex items-center text-sm mr-2 ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
                             <Star size={14} className="mr-1 text-yellow-400" fill="#FFEF5C" />
                             {pose.points}
                           </span>
@@ -1111,38 +1102,38 @@ const YogaPoseLibrary = () => {
                             aria-label={favoriteIDs.includes(pose.id) ? "Remove from favorites" : "Add to favorites"}
                           >
                             <Star size={18} fill={favoriteIDs.includes(pose.id) ? "#FFEF5C" : "none"} 
-                              className={favoriteIDs.includes(pose.id) ? "text-yellow-300" : darkMode ? "text-gray-400" : "text-gray-500"} />
+                              className={favoriteIDs.includes(pose.id) ? "text-yellow-300" : darkMode ? "text-indigo-400" : "text-gray-500"} />
                           </button>
                         </div>
                       </div>
                       
                       <div className="flex items-center mt-1 mb-1">
                         <div className="w-2 h-2 rounded-full mr-1" style={{ backgroundColor: pose.chakraColor }}></div>
-                        <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        <span className={`text-xs ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
                           {pose.chakra}
                         </span>
-                        <span className={`mx-2 text-xs ${darkMode ? 'text-gray-600' : 'text-gray-400'}`}>•</span>
-                        <Clock size={12} className={`mr-1 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} />
-                        <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        <span className={`mx-2 text-xs ${darkMode ? 'text-indigo-400' : 'text-gray-400'}`}>•</span>
+                        <Clock size={12} className={`mr-1 ${darkMode ? 'text-indigo-400' : 'text-gray-500'}`}></Clock>
+                        <span className={`text-xs ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
                           {pose.duration}
                         </span>
                       </div>
                       
-                      <p className={`text-xs mt-1 mb-auto ${darkMode ? 'text-gray-400' : 'text-gray-600'} line-clamp-2`}>
+                      <p className={`text-xs mt-1 mb-auto ${darkMode ? 'text-indigo-400' : 'text-gray-600'} line-clamp-2`}>
                         {pose.description}
                       </p>
                       
                       <div className="flex mt-2 space-x-2">
                         <button
                           onClick={() => openVideo(pose)}
-                          className={`py-1 px-2 rounded-lg flex items-center justify-center text-xs ${darkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                          className={`py-1 px-2 rounded-lg flex items-center justify-center text-xs ${darkMode ? 'bg-gray-800 text-indigo-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                         >
                           <PlayCircle size={12} className="mr-1" />
                           Demo
                         </button>
                         <button
                           onClick={() => startPractice(pose)}
-                          className="py-1 px-2 rounded-lg flex items-center justify-center text-xs text-white"
+                          className="py-1 px-2 rounded-lg flex items-center justify-center text-xs text-white hover:opacity-90"
                           style={{ backgroundColor: pose.chakraColor }}
                         >
                           <Timer size={12} className="mr-1" />
@@ -1150,7 +1141,7 @@ const YogaPoseLibrary = () => {
                         </button>
                         <button
                           onClick={() => openVideo(pose)}
-                          className={`py-1 px-2 rounded-lg flex items-center justify-center text-xs ${darkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                          className={`py-1 px-2 rounded-lg flex items-center justify-center text-xs ${darkMode ? 'bg-gray-800 text-indigo-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                         >
                           <Info size={12} className="mr-1" />
                           Details
@@ -1169,31 +1160,25 @@ const YogaPoseLibrary = () => {
                   <button
                     onClick={() => paginate(Math.max(1, currentPage - 1))}
                     disabled={currentPage === 1}
-                    className={`p-2 rounded-lg ${darkMode ? 'text-gray-400 hover:bg-gray-800 disabled:text-gray-700' : 'text-gray-600 hover:bg-gray-100 disabled:text-gray-300'} ${currentPage === 1 ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                    className={`p-2 rounded-lg ${darkMode ? 'text-indigo-400 hover:bg-gray-800 disabled:text-gray-600' : 'text-gray-600 hover:bg-gray-200 disabled:text-gray-400'}`}
                     aria-label="Previous page"
                   >
                     <ChevronLeft size={20} />
                   </button>
-                  
-                  {[...Array(totalPages)].map((_, idx) => (
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                     <button
-                      key={idx}
-                      onClick={() => paginate(idx + 1)}
-                      className={`w-8 h-8 flex items-center justify-center rounded-lg ${
-                        currentPage === idx + 1 
-                          ? (darkMode ? 'bg-indigo-700 text-white' : 'bg-indigo-600 text-white') 
-                          : (darkMode ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-100')
-                      }`}
-                      aria-label={`Page ${idx + 1}`}
+                      key={page}
+                      onClick={() => paginate(page)}
+                      className={`px-3 py-1 rounded-lg ${currentPage === page ? (darkMode ? 'bg-indigo-700 text-white' : 'bg-indigo-600 text-white') : (darkMode ? 'text-indigo-400 hover:bg-gray-800' : 'text-gray-600 hover:bg-gray-200')}`}
+                      aria-label={`Page ${page}`}
                     >
-                      {idx + 1}
+                      {page}
                     </button>
                   ))}
-                  
                   <button
                     onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
                     disabled={currentPage === totalPages}
-                    className={`p-2 rounded-lg ${darkMode ? 'text-gray-400 hover:bg-gray-800 disabled:text-gray-700' : 'text-gray-600 hover:bg-gray-100 disabled:text-gray-300'} ${currentPage === totalPages ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                    className={`p-2 rounded-lg ${darkMode ? 'text-indigo-400 hover:bg-gray-800 disabled:text-gray-600' : 'text-gray-600 hover:bg-gray-200 disabled:text-gray-400'}`}
                     aria-label="Next page"
                   >
                     <ChevronRight size={20} />
@@ -1204,16 +1189,22 @@ const YogaPoseLibrary = () => {
           </>
         )}
       </main>
-      
-     
-      {/* Video Modal */}
+
+      {/* Modals */}
       {showVideo && (
-        <VideoModal pose={showVideo} onClose={() => setShowVideo(null)} darkMode={darkMode} />
+        <VideoModal 
+          pose={showVideo} 
+          onClose={() => setShowVideo(null)} 
+          darkMode={darkMode} 
+        />
       )}
       
-      {/* Timer Modal */}
       {showTimer && (
-        <TimerModal pose={showTimer} onClose={() => setShowTimer(null)} darkMode={darkMode} />
+        <TimerModal 
+          pose={showTimer} 
+          onClose={() => setShowTimer(null)} 
+          darkMode={darkMode} 
+        />
       )}
     </div>
   );
