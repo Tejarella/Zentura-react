@@ -806,7 +806,7 @@ const Home = ({ darkMode }) => {
                       <ul className={`space-y-2 ${darkMode ? 'text-indigo-300' : 'text-gray-600'}`}>
                         {activeChakra.benefits.map((benefit, index) => (
                           <li key={index} className="flex items-center">
-                            <Shield argueCheck size={16} className="mr-2" style={{ color: activeChakra.color }} />
+                            <ShieldCheck size={16} className="mr-2" style={{ color: activeChakra.color }} />
                             {benefit}
                           </li>
                         ))}
