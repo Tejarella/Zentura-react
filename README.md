@@ -51,11 +51,11 @@ By combining ancient wisdom with a modern user interface, the app makes holistic
 
 | DashBoard Page| Diagnosis Page |
 |-----------------|------------------------|
-| ![Meditation](13.png) | ![Mobile](14.png) |
+| ![Meditation](13.png) | ![Mobile](16.png) |
 
 | Meditation Page | Yoga Timer Page |
 |-----------------|------------------------|
-| ![Meditation](15.png) | ![Mobile](15.png) |
+| ![Meditation](14.png) | ![Mobile](15.png) |
 
 ---
 
