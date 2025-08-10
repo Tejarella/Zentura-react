@@ -1,3 +1,57 @@
+# 🧘‍♀️ ZenYogi – Chakra Balancing App
+
+ZenYoga is a modern web application built with **React** and **Vite** that helps users understand, track, and balance their **7 chakras** through guided exercises, yoga poses, and meditation techniques.  
+It offers a clean, responsive, and interactive experience for users seeking mental, physical, and spiritual well-being.
+
+---
+
+## 📌 Problem Statement
+In today’s fast-paced world, people face high stress, emotional instability, and poor lifestyle habits.  
+Ancient traditions describe **7 chakras**—energy centers in the human body that directly impact our mental, emotional, and physical health.  
+When these chakras are blocked or imbalanced, it can lead to anxiety, fatigue, and loss of focus.
+
+---
+
+## 💡 Solution
+ZenYoga provides an easy-to-use digital platform that guides users through **yoga poses, breathing exercises, and meditations** designed to **balance each of the 7 chakras**.  
+By combining ancient wisdom with a modern user interface, the app makes holistic wellness accessible for everyone, anywhere.
+
+---
+
+## 🚀 Features
+- 🌈 Detailed guides for all **7 chakras**
+- 🧘 Yoga poses & breathing exercises to restore chakra balance
+- 🎧 Guided meditation for relaxation and healing
+- 📱 Fully responsive mobile-friendly design
+- 🎨 Modern UI with reusable React components
+- 📅 Personalized daily chakra balancing routine
+
+---
+
+## 🛠️ Tech Stack
+- **Frontend:** React, Vite  
+- **Styling:** Tailwind CSS  
+- **Routing:** React Router  
+- **State Management:** useState / useContext  
+- **Icons:** Lucide React / Font Awesome  
+- **Others:** ESLint, Prettier, Git
+
+---
+
+## 📷 Screenshots
+*(Place your screenshots in a `screenshots/` folder and update paths below)*  
+
+![Homepage](screenshots/homepage.png)  
+*Dashboard showing chakra overview*  
+
+![Chakra Detail](screenshots/chakra-detail.png)  
+*Yoga poses and exercises for a specific chakra*  
+
+![Meditation Guide](screenshots/meditation.png)  
+*Guided meditation interface*
+
+---
+
 # 🧘‍♀️ ZenYoga – Chakra Balancing App
 
 ZenYoga is a modern web application built with **React** and **Vite** that helps users understand, track, and balance their **7 chakras** through guided exercises, yoga poses, and meditation techniques.  
@@ -54,27 +108,25 @@ By combining ancient wisdom with a modern user interface, the app makes holistic
 
 ## ⚙️ Installation & Running Locally
 
-1️⃣ **Clone the repository**  
+Follow these steps to run **ZenYoga** on your local machine:
 
-git clone https://github.com/your-username/zenyoga.git
-2️⃣ Navigate to the project folder
-
-cd zenyoga
-3️⃣ Install dependencies
-
-
-npm install
-4️⃣ Start the development server
-
-bash
-Copy
-Edit
-npm run dev
-5️⃣ Open in browser
-
-
-http://localhost:5173
+1. **Clone the repository**
+   ```bash
+   https://github.com/Tejarella/Zentura-react.git
+2. **Navigate to the project folder**
+   ```bash
+   cd Zentura-react-master
+3. **Install dependencies**
+   ```bash
+    npm install
+4. **Start the development server**
+   ```bash
+    npm run dev
+5. **Open the app in your browser**
+   ```bash
+    http://localhost:5173
 🔗 Live Demo
+https://zenturayoga.netlify.app/
 Click here to view the live project
 
 (Deploy easily using Vercel or Netlify)
